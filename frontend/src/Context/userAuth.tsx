@@ -23,89 +23,81 @@ type Props = {children: React.ReactNode}
 const UserContext = createContext<UserContextType>({} as UserContextType)
 
 export const UserProvider = ({children}: Props ) => {
+    const navigate = useNavigate();
+    const [token, setToken] = useState<string | null>(null);
+    const [user, setUser] = useState<UserProfile | null>(null);
+    const [isReady, setIsReady] = useState(true);
 
-    const navigate =  useNavigate()
-    const [token, setToken] = useState<string | null>(null) 
-    const [user, setUser] = useState<UserProfile | null>(null)
-    const [isReady, setIsReady] = useState(false)
+    useEffect(() => {
+        const user = localStorage.getItem("user");
+        const token = localStorage.getItem("token");
 
-    useEffect( () => {
-
-        const user = localStorage.getItem("user")
-        const token = localStorage.getItem("token")
-        
-        if(user && token){
-            setUser(JSON.parse(user))
-            setToken(token)
-            axios.defaults.headers.common["Authorization"] = "Bearer " + token
+        if (user && token) {
+            setUser(JSON.parse(user));
+            setToken(token);
+            axios.defaults.headers.common["Authorization"] = "Bearer " + token;
         }
 
-        setIsReady(true)
+        console.log("Setting isReady to true");
+        setIsReady(true);
+    }, []);
 
-    }, [])
-
-    const registerUser = async (email:string, username: string, password: string) => {
+    const registerUser = async (email: string, username: string, password: string) => {
         await registerAPI(email, username, password).then((res) => {
-            if(res){
-
-                localStorage.setItem("token", res?.data.token)
-
-                const userObj = {
-                    username: res?.data.username,
-                    email: res?.data.email
-                }
-
-                localStorage.setItem("user", JSON.stringify(userObj))
-                setToken(res?.data.token)
-                setUser(userObj)
-                toast.success("Login success")
-                navigate("/search")
-            } 
-        }).catch((e) => toast.warning("server error occured: " + e))
-    }
-
-    const loginUser = async ( username: string, password: string) => {
-        await loginAPI( username, password).then((res) => {
-            if(res){
-
-                localStorage.setItem("token", res?.data.token)
+            if (res) {
+                localStorage.setItem("token", res?.data.token);
 
                 const userObj = {
                     username: res?.data.username,
                     email: res?.data.email
-                }
+                };
 
-                localStorage.setItem("user", JSON.stringify(userObj))
+                localStorage.setItem("user", JSON.stringify(userObj));
+                setToken(res?.data.token);
+                setUser(userObj);
+                toast.success("Login success");
+                navigate("/search");
+            }
+        }).catch((e) => toast.warning("server error occurred: " + e));
+    };
 
-                setToken(res?.data.token)
-                setUser(userObj)
+    const loginUser = async (username: string, password: string) => {
+        await loginAPI(username, password).then((res) => {
+            if (res) {
+                localStorage.setItem("token", res?.data.token);
 
-                toast.success("Login success")
+                const userObj = {
+                    username: res?.data.username,
+                    email: res?.data.email
+                };
 
-                navigate("/search")
-            } 
-        }).catch((e) => toast.warning("server error occured: " + e))
-    }
+                localStorage.setItem("user", JSON.stringify(userObj));
+                setToken(res?.data.token);
+                setUser(userObj);
+                toast.success("Login success");
+                navigate("/search");
+            }
+        }).catch((e) => toast.warning("server error occurred: " + e));
+    };
 
     const isLoggedIn = () => {
-        return !!user
-    }
+        return !!user;
+    };
 
     const logout = () => {
-        localStorage.removeItem("token")
-        localStorage.removeItem("user")
-        setUser(null)
-        setToken("")
-        navigate("/")
-    }
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        setUser(null);
+        setToken("");
+        navigate("/");
+    };
 
     return (
-        <UserContext.Provider value = {{ loginUser, user, token, logout, isLoggedIn, registerUser}}>
-
+        <UserContext.Provider value={{ loginUser, user, token, logout, isLoggedIn, registerUser }}>
             {isReady ? children : null}
-
         </UserContext.Provider>
-    )
-}
+    );
+};
+
 
 export const useAuth = () => React.useContext(UserContext)
