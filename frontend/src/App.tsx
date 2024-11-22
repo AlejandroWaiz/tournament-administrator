@@ -1,28 +1,26 @@
 import {useState} from 'react';
-import logo from './assets/images/logo-universal.png';
-import './App.css';
 import {Greet} from "../wailsjs/go/main/App";
-import LoginPage from './Pages/LoginPage/LoginPage';
 import { UserProvider } from './Context/userAuth';
+import { Outlet, RouterProvider } from 'react-router';
+import { ToastContainer } from 'react-toastify';
+import "./App.css"
+import SidebarComponent from './Components/Sidebar/SidebarComponent';
+import HomePage from './Pages/HomePage/HomePage';
 
 function App() {
-    const [resultText, setResultText] = useState("Please enter your name below 👇");
-    const [name, setName] = useState('');
-    const updateName = (e: any) => setName(e.target.value);
-    const updateResultText = (result: string) => setResultText(result);
 
-    function greet() {
-        Greet(name).then(updateResultText);
-    }
+    const [expanded, setExpanded] = useState(true);
 
-
-    //todo: agregar router ya que navigate() da error cuando no se usa en ese contexto
     return (
         <div id="App">
-            <UserProvider>
-                <LoginPage/>
-            </UserProvider>
-            
+                <UserProvider>
+                    <SidebarComponent expanded={expanded} setExpanded={setExpanded} />
+                    <div  className={`main-content ${expanded ? '' : 'collapsed'}`}>
+                    <HomePage/>
+                    </div>
+                    <Outlet/>             
+                    <ToastContainer/>
+                </UserProvider>        
         </div>
     )
 }
