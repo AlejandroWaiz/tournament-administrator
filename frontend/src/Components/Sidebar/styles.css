@@ -1,0 +1,116 @@
+/* Asegúrate de que la sidebar se minimice al tamaño del botón de la flecha */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 200px; /* Ancho cuando está expandida */
+  background-color: #333; /* Color de fondo */
+  color: white; /* Color del texto */
+  overflow-y: auto; /* Contenido desplazable */
+  transition: width 0.3s; /* Transición suave para expandir/colapsar */
+}
+
+.sidebar.collapsed {
+  width: 30px; /* Ancho cuando está colapsada, ajustado al tamaño del botón */
+}
+
+.main-content {
+  margin-left: 250px; /* Ajustar según el ancho de la sidebar */
+  transition: margin-left 0.3s; /* Transición suave para el contenido principal */
+}
+
+.main-content.collapsed {
+  margin-left: 40px; /* Ajustar según el ancho colapsado de la sidebar */
+}
+
+.text-primary-500 {
+  color: #dc3131; /* Azul */
+}
+
+.bg-primary-200 {
+  background-color: #e0e7ff; /* Naranjo claro */
+}
+
+.logo {
+  background-color: transparent; /* Asegurar que el fondo sea transparente */
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  transition: padding-left 0.3s;
+  color: white; /* Color original de los ítems */
+  list-style: none; /* Eliminar el estilo de lista predeterminado */
+  border-radius: 8px; /* Bordes redondeados */
+}
+
+.sidebar-item:hover {
+  background-color: #00000033; /* Resaltar al pasar el mouse */
+  border-radius: 8px; /* Asegurar que los bordes redondeados se mantengan al pasar el mouse */
+}
+
+.sidebar-submenu {
+  padding-left: 1rem;
+  transition: padding-left 0.3s;
+  color: white; /* Color original de los submenús */
+  display: none; /* Ocultar submenús por defecto */
+  list-style: none; /* Eliminar el estilo de lista predeterminado */
+}
+
+.sidebar-submenu.expanded {
+  display: block; /* Mostrar submenús cuando están expandidos */
+  border-radius: 8px; /* Bordes redondeados para los submenús */
+}
+
+.bg-sidebar {
+  background-color: hwb(213 36% 6%); /* Naranjo más claro */
+}
+
+.overflow-y-auto {
+  overflow-y: auto; /* Añadir desplazamiento vertical */
+}
+
+.min-h-screen {
+  min-height: 100%; /* Asegurar que el contenedor tenga la altura mínima de la pantalla */
+}
+
+/* Ocultar iconos cuando la sidebar está colapsada */
+.icon-container.hidden {
+  display: none;
+}
+
+/* Contenedor para el botón de alternar */
+.toggle-container {
+  display: flex;
+  justify-content: flex-end; /* Asegurar que el botón esté pegado hacia la derecha */
+  padding: 0.5rem; /* Añadir padding para que el botón no esté pegado al borde */
+}
+
+/* Estilo para el botón de alternar */
+.toggle-button {
+  display: flex;
+  justify-content: center; /* Centrar el icono de la flecha */
+  align-items: center;
+  width: 30px; /* Tamaño fijo para el botón */
+  height: 30px; /* Tamaño fijo para el botón */
+}
+
+/* Agregar espacio entre el icono y el texto del menú */
+.icon-container {
+  margin-right: 10px; /* Ajusta este valor según sea necesario */
+}
+
+.sidebar.collapsed {
+  width: 40px; /* Ancho cuando está colapsada */
+}
+
+.main-content {
+  margin-left: 200px; /* Ajustar según el ancho de la sidebar expandida */
+  transition: margin-left 0.3s;
+}
+
+.main-content.collapsed {
+  margin-left: 40px; /* Ajustar según el ancho colapsado de la sidebar */
+}
