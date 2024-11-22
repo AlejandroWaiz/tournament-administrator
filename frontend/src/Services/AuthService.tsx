@@ -3,7 +3,7 @@ import { handleError } from "../Helpers/ErrorHandler";
 import { UserProfileToken } from "../Models/User";
 
 
-const api = "http://localhost:5167"
+const api = "http://localhost:5167/api/"
 
 export const loginAPI = async (username: string, password: string) => {
 
