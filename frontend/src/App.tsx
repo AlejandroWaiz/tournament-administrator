@@ -5,7 +5,7 @@ import { Outlet, RouterProvider } from 'react-router';
 import { ToastContainer } from 'react-toastify';
 import "./App.css"
 import SidebarComponent from './Components/Sidebar/SidebarComponent';
-import HomePage from './Pages/HomePage/HomePage';
+import HomePage from './Pages/Home/HomePage';
 
 function App() {
 
@@ -16,10 +16,10 @@ function App() {
                 <UserProvider>
                     <SidebarComponent expanded={expanded} setExpanded={setExpanded} />
                     <div  className={`main-content ${expanded ? '' : 'collapsed'}`}>
-                    <HomePage/>
+                        <HomePage/>
                     </div>
                     <Outlet/>             
-                    <ToastContainer/>
+                    <ToastContainer/>c 
                 </UserProvider>        
         </div>
     )
