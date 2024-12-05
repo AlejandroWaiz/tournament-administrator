@@ -1,8 +1,9 @@
 package entitys
 
 type Match struct {
-	Encounters         []Encounter
-	NumberOfEncounters int
-	Players            []Player
-	Winner, Loser      []Player
+	Encounters         []Encounter `json:"encounters"`
+	NumberOfEncounters int         `json:"numberOfEncounters"`
+	Players            []Player    `json:"players"`
+	Winner             Player      `json:"matchWinner"`
+	Loser              Player      `json:"matchLoser"`
 }
