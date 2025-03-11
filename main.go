@@ -2,6 +2,7 @@ package main
 
 import (
 	"embed"
+	"tournament-administrator/backend/entitys"
 
 	"github.com/wailsapp/wails/v2"
 	"github.com/wailsapp/wails/v2/pkg/options"
@@ -15,6 +16,9 @@ func main() {
 	// Create an instance of the app structure
 	app := NewApp()
 
+	PlayerManager := &entitys.PlayerManager{}
+	TournamentManager := &entitys.TournamentManager{}
+
 	// Create application with options
 	err := wails.Run(&options.App{
 		Title:  "tournament-administrator",
@@ -27,6 +31,10 @@ func main() {
 		OnStartup:        app.startup,
 		Bind: []interface{}{
 			app,
+			PlayerManager,
+			TournamentManager,
+			//TODO: implement auth but after logic implementation
+			//auth,
 		},
 	})
 
