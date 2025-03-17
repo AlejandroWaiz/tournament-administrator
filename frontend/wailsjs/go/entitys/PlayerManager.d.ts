@@ -3,3 +3,5 @@
 import {entitys} from '../models';
 
 export function CreatePlayer(arg1:string,arg2:string):Promise<entitys.Player>;
+
+export function GetExamplePlayers():Promise<Array<entitys.Player>>;

@@ -5,3 +5,7 @@
 export function CreatePlayer(arg1, arg2) {
   return window['go']['entitys']['PlayerManager']['CreatePlayer'](arg1, arg2);
 }
+
+export function GetExamplePlayers() {
+  return window['go']['entitys']['PlayerManager']['GetExamplePlayers']();
+}

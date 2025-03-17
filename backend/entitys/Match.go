@@ -1,8 +1,8 @@
 package entitys
 
 type Match struct {
-	ID                 int         `json:"id"`
-	RoundID            int         `json:"round_id"`
+	ID                 string      `json:"id"`
+	RoundID            string      `json:"round_id"`
 	NumberOfEncounters int         `json:"number_of_encounters"`
 	Player1            Player      `json:"player1"`
 	Player2            Player      `json:"player2"`

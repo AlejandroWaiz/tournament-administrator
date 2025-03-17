@@ -16,9 +16,9 @@ function App() {
                 <UserProvider>
                     <SidebarComponent expanded={expanded} setExpanded={setExpanded} />
                     <div  className={`main-content ${expanded ? '' : 'collapsed'}`}>
-                        <HomePage/>
+                    <Outlet/> 
                     </div>
-                    <Outlet/>             
+            
                     <ToastContainer/>c 
                 </UserProvider>        
         </div>

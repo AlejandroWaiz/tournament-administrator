@@ -6,6 +6,7 @@ toolchain go1.22.3
 
 require (
 	firebase.google.com/go v3.13.0+incompatible
+	github.com/dchest/uniuri v1.2.0
 	github.com/wailsapp/wails/v2 v2.9.1
 	google.golang.org/api v0.209.0
 )
